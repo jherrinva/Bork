@@ -8,7 +8,7 @@ public class Room
 {
     private String title;
     private String desc;
-    private boolean beenHere;
+    private boolean beenHere = false;
     
     public Room(String title)
     {
@@ -27,10 +27,14 @@ public class Room
     
     protected String describe ()
     {
-        if (beenHere)
+        if (!beenHere)
+        {
+            beenHere = true;
             return desc;
+        }
+            
         else 
-            return desc;
+            return title;
     }
     
     

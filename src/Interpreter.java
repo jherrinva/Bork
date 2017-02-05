@@ -19,5 +19,14 @@ public class Interpreter
             System.out.println("What would you like to do? : ");
             userInput = in.nextLine();
         }
+        
+        
+        
+        //////////Test room below////////////
+        Room newRoom = new Room("Dr Zietz Room");
+        newRoom.setDesc("This room is very hot.  Find the thermostat!");
+        newRoom.describe()
+        
+        ///////////////////////////////////////////
     }
 }
