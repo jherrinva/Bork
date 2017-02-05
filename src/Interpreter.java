@@ -12,7 +12,7 @@ public class Interpreter
     private static Dungeon buildSampleDungeon()
     {
         Room zietzDungeonEntry = new Room("Zietz Dungeon Entry");
-        zietzDungeonEntry.setDesc("This room is very hot! Find the thermostat");
+        zietzDungeonEntry.setDesc("This room is the Zietz Dungeon Entry! This room is very hot! Find the thermostat");
         Dungeon sampleDungeon = new Dungeon(zietzDungeonEntry,"Zietz Dungeon");
         
         return sampleDungeon;
@@ -24,7 +24,8 @@ public class Interpreter
     {   
         
         Dungeon startingDungeon = buildSampleDungeon();
-        System.out.println("Welcome to " + startingDungeon.getName() + ".  You are in " + startingDungeon.getEntry().getTitle() + ". " +  startingDungeon.getEntry().describe());
+        System.out.println("Welcome to " + startingDungeon.getName() + ". " + startingDungeon.getEntry().describe());
+        System.out.println(startingDungeon.getEntry().describe()); // tests to make sure describe ran twice only provides the title
         
         
         /////////Sample query below/////////
