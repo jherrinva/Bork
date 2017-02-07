@@ -15,6 +15,8 @@ public class Interpreter
         Room livingRoom = new Room("Living Room");
         Room bedroom = new Room("Bedroom");
         Room closet = new Room("Closet");
+        Room kitchen = new Room("Kitchen");
+        Room pantry = new Room("Pantry");
         //////////////////////////
         
         
@@ -23,6 +25,8 @@ public class Interpreter
         livingRoom.setDesc("This room is very colorful.  There is one chair, and a scary rabbit is sitting in it.");
         bedroom.setDesc("This room is very hot! But there are no windows");
         closet.setDesc("This closet is bigger than the bedroom itself.  But all the clothes inside have been eaten by moths.");
+        kitchen.setDesc("This place hasnt been cleaned in years.  There is a basketball in the sink for some reason.");
+        pantry.setDesc("The cupboards are bare.  All thats left is an unopened twinkie.  Suprisingly in good condition.");
         /////////////////////////////////////
         
         
@@ -39,6 +43,21 @@ public class Interpreter
         
         Exit closetToBed = new Exit("e",closet,bedroom);
         closet.addExit(closetToBed);
+        
+        Exit lrToKitchen = new Exit("s",livingRoom,kitchen);
+        livingRoom.addExit(lrToKitchen);
+        
+        Exit kitchenToLr = new Exit("n",kitchen,livingRoom);
+        kitchen.addExit(kitchenToLr);
+        
+        Exit kitchenToPantry = new Exit("w",kitchen,pantry);
+        kitchen.addExit(kitchenToPantry);
+        
+        Exit pantryToKitchen = new Exit("e",pantry,kitchen);
+        pantry.addExit(pantryToKitchen);
+        
+        
+        
         
         //////////////////////////////////////
         
