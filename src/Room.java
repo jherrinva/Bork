@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
 
 
 
@@ -12,7 +14,7 @@ public class Room
     private String title;
     private String desc;
     private boolean beenHere = false;
-    ArrayList<Exit> exitList = new ArrayList<>();
+    public Hashtable<String, Exit> exitList = new Hashtable<>();
     
     public Room(String title)
     {
@@ -31,27 +33,46 @@ public class Room
     
     protected String describe ()
     {
+        
+        Set<String> keys = exitList.keySet(); //adds all keys inside hashtable to this set
+        String exitDescriptions = "";
+        
+        for (String theKey : keys) // iterates through all keys by the string keyvalues
+        {
+            exitDescriptions += exitList.get(theKey).describe() + ". ";
+        }
+        
         if (!beenHere)
         {
             beenHere = true;
-            return desc;
-        }
-            
+            return "You are in the " + title + ". " + desc + ". " + exitDescriptions;
+        }   
         else 
-            return title;
+        {
+            return ("You are in the " + title + ". " + exitDescriptions);
+        }
         
-        //add printout for discription of each exit to this method
         
     }
     
     protected Room leaveBy(String dir)
     {
+        if (!exitList.containsKey(dir))
+        {
+            return null;
+        }
+        else
+        {
+            Room roomToEnterInto = exitList.get(dir).getDest();
+            return roomToEnterInto;
+        }
         //returns the room object reachable by the direction user inputs
         //return null if no exit in the users direction queried 
     }
     
     public void addExit(Exit exit)
     {
+        exitList.put(exit.getDir(),exit);
         // creates exit object, adds to exit arraylist
     }
     

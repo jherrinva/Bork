@@ -18,7 +18,8 @@ public class Exit
     
    protected String describe()
    {
-      
+      String description = "You can go " + dir + " to " + destination.getTitle();
+      return description;
    }
    
    public String getDir()
@@ -28,12 +29,12 @@ public class Exit
    
    public Room getSrc()
    {
-       
+       return source;
    }
    
    public Room getDest()
    {
-       
+       return destination;
    }
     
     

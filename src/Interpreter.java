@@ -11,9 +11,40 @@ public class Interpreter
     
     private static Dungeon buildSampleDungeon()
     {
-        Room zietzDungeonEntry = new Room("Zietz Dungeon Entry");
-        zietzDungeonEntry.setDesc("This room is the Zietz Dungeon Entry! This room is very hot! Find the thermostat");
-        Dungeon sampleDungeon = new Dungeon(zietzDungeonEntry,"Zietz Dungeon");
+        ////create rooms///////
+        Room livingRoom = new Room("Living Room");
+        Room bedroom = new Room("Bedroom");
+        Room closet = new Room("Closet");
+        //////////////////////////
+        
+        
+        
+        ////set descriptoins////////////////
+        livingRoom.setDesc("This room is very colorful.  There is one chair, and a scary rabbit is sitting in it.");
+        bedroom.setDesc("This room is very hot! But there are no windows");
+        closet.setDesc("This closet is bigger than the bedroom itself.  But all the clothes inside have been eaten by moths.");
+        /////////////////////////////////////
+        
+        
+        
+        ////////add exits to all rooms//////////////
+        Exit lrToBedroom = new Exit("w",livingRoom,bedroom);
+        livingRoom.addExit(lrToBedroom);
+        
+        Exit bedToLr = new Exit("e",bedroom,livingRoom);
+        bedroom.addExit(bedToLr);
+        
+        Exit bedToCloset = new Exit("w",bedroom,closet);
+        bedroom.addExit(bedToCloset);
+        
+        Exit closetToBed = new Exit("e",closet,bedroom);
+        closet.addExit(closetToBed);
+        
+        //////////////////////////////////////
+        
+        
+        
+        Dungeon sampleDungeon = new Dungeon(livingRoom,"Zietz Dungeon");
         
         return sampleDungeon;
     }
