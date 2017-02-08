@@ -37,7 +37,10 @@ public class GameState
     
     public void setAdventurersCurrentRoom(Room room)
     {
-        this.currentRoom = room;
+        if (room != null)
+            this.currentRoom = room;
+        else    
+            System.out.println("You cant go that direction");
     }
     
     public Dungeon getDungeon()

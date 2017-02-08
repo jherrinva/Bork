@@ -31,7 +31,7 @@ public class Room
         this.desc = desc;
     }
     
-    protected String describe ()
+    protected String describe()
     {
         
         Set<String> keys = exitList.keySet(); //adds all keys inside hashtable to this set

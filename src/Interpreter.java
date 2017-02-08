@@ -21,12 +21,12 @@ public class Interpreter
         
         
         
-        ////set descriptoins////////////////
-        livingRoom.setDesc("This room is very colorful.  There is one chair, and a scary rabbit is sitting in it.");
+        ////set descriptions////////////////
+        livingRoom.setDesc("This room is very colorful.  There is one chair, and a scary rabbit is sitting in it");
         bedroom.setDesc("This room is very hot! But there are no windows");
-        closet.setDesc("This closet is bigger than the bedroom itself.  But all the clothes inside have been eaten by moths.");
-        kitchen.setDesc("This place hasnt been cleaned in years.  There is a basketball in the sink for some reason.");
-        pantry.setDesc("The cupboards are bare.  All thats left is an unopened twinkie.  Suprisingly in good condition.");
+        closet.setDesc("This closet is bigger than the bedroom itself.  But all the clothes inside have been eaten by moths");
+        kitchen.setDesc("This place hasnt been cleaned in years.  There is a basketball in the sink for some reason");
+        pantry.setDesc("The cupboards are bare.  All thats left is an unopened twinkie.  Suprisingly in good condition");
         /////////////////////////////////////
         
         
@@ -56,14 +56,11 @@ public class Interpreter
         Exit pantryToKitchen = new Exit("e",pantry,kitchen);
         pantry.addExit(pantryToKitchen);
         
-        
-        
-        
         //////////////////////////////////////
         
         
         
-        Dungeon sampleDungeon = new Dungeon(livingRoom,"Zietz Dungeon");
+        Dungeon sampleDungeon = new Dungeon(livingRoom,"John's Dungeon");
         
         return sampleDungeon;
     }
@@ -74,23 +71,38 @@ public class Interpreter
     {   
         
         
-        
         GameState myGame = GameState.instance();
         myGame.initialize(buildSampleDungeon());
+        CommandFactory myFactory = CommandFactory.instance();
         
         
-        
-        
+        Scanner in = new Scanner(System.in);
+        String direction = "";
+        System.out.println("Welcome to " + myGame.getDungeon().getName() + ". ");
+         
+        while (true)
+        {
+           
+            System.out.println(myGame.getAdventurersCurrentRoom().describe());
+            System.out.print("\n<");
+            direction = in.nextLine();
+            if (direction.equals("q"))
+            {
+                break;
+            }
+            boolean commandExists = myFactory.commandList.containsKey(direction);
+            if (commandExists)
+            {
+                myFactory.parse(direction).execute();
+            }
+            else
+            {
+                System.out.println("Unknown Command.  Please try again");
+            }
+            
+        }
 
 
-/////////keep incase needed/////////////////
-        //Dungeon startingDungeon = buildSampleDungeon();
-        //System.out.println("Welcome to " + startingDungeon.getName() + ". " + startingDungeon.getEntry().describe());
-        //System.out.println(startingDungeon.getEntry().describe()); // tests to make sure describe ran twice only provides the title
-        
-        
-        
-       
     }
     
 }
