@@ -6,7 +6,7 @@ import java.util.Set;
 
 
 /**
- *
+ * This class contains all information pertaining to a single room
  * @author John Herrin
  */
 public class Room 
@@ -16,21 +16,39 @@ public class Room
     private boolean beenHere = false;
     public Hashtable<String, Exit> exitList = new Hashtable<>();
     
+    
+    /**
+     * Constructor for room
+     * @param title Name of room
+     */
     public Room(String title)
     {
         this.title = title;
     }
     
+    /**
+     * Returns string containing title of room
+     * @return Title of room
+     */
     public String getTitle()
     {
         return title;
     }
     
+    /**
+     * Sets the description of room to instance variable
+     * @param desc description of room to take in
+     */
     public void setDesc(String desc)
     {
         this.desc = desc;
     }
     
+    
+    /**
+     * Returns string containing description of room
+     * @return string containing description of room
+     */
     protected String describe()
     {
         
@@ -55,6 +73,11 @@ public class Room
         
     }
     
+    /**
+     * Used to leave a room and go to another.  
+     * @param dir  direction to leave by
+     * @return  returns room you will enter
+     */
     protected Room leaveBy(String dir)
     {
         if (!exitList.containsKey(dir))
@@ -70,6 +93,10 @@ public class Room
         //return null if no exit in the users direction queried 
     }
     
+    /**
+     * used to add an exit to the list of exits the Room contains
+     * @param exit exit to add to list
+     */
     public void addExit(Exit exit)
     {
         exitList.put(exit.getDir(),exit);

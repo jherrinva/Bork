@@ -7,11 +7,19 @@ public class Command
     
     private String dir;
     
+    /**
+     * Constructor
+     * @param dir String associated with the command
+     */
     protected Command(String dir) 
     {
         this.dir = dir;
     }
     
+    /**
+     * executes user command.  Currently only used to switch users currentRoom
+     * @return String containing info on command.  Currently blank and unused
+     */
     protected String execute()
     {
         

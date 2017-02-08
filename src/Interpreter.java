@@ -1,14 +1,17 @@
 
-/**
- *
- * @author John Herrin
- */
 
 import java.util.Scanner;
 
+/**
+ * Contains main method, and a method to build a sample dungeon
+ * @author John Herrin
+ */
 public class Interpreter 
 {
-    
+    /**
+     * Used to create a prebuilt dungeon
+     * @return prebuilt dungeon object
+     */
     private static Dungeon buildSampleDungeon()
     {
         ////create rooms///////
@@ -80,6 +83,10 @@ public class Interpreter
         String direction = "";
         System.out.println("Welcome to " + myGame.getDungeon().getName() + ". ");
          
+        
+        /**
+         * While loop asks user what do until 'q' is entered.
+         */
         while (true)
         {
            

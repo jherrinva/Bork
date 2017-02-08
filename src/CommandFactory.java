@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 
 /**
- *
+ * This class contains all valid commands user can use, determines what user wants when they type, and returns the necessary command
  * @author John Herrin
  */
 public class CommandFactory 
@@ -25,11 +25,18 @@ public class CommandFactory
     commandList.put("w",west);
     }
     
+    /**
+     * Private constructor for a Singleton class
+     */
     private CommandFactory()
     {
         
     }
     
+    /**
+     * initializer for singleton class
+     * @return returns first creation of the object, or the already existing object
+     */
     public static CommandFactory instance()
     {
         if(commandFactoryInstance == null)
@@ -39,6 +46,11 @@ public class CommandFactory
         return commandFactoryInstance;
     }
 
+    /**
+     * Takes in user command, sorts through hashtable of commands, and returns the correct command
+     * @param commandString users command
+     * @return the command user waanted
+     */
     protected Command parse(String commandString)
     {
         Command tempCommand = commandList.get(commandString);
