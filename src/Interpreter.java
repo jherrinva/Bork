@@ -64,6 +64,11 @@ public class Interpreter
         
         
         Dungeon sampleDungeon = new Dungeon(livingRoom,"John's Dungeon");
+        sampleDungeon.add(bedroom);
+        sampleDungeon.add(closet);
+        sampleDungeon.add(kitchen);
+        sampleDungeon.add(pantry);
+        
         
         return sampleDungeon;
     }
