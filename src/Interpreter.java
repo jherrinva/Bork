@@ -88,6 +88,18 @@ public class Interpreter
         String direction = "";
         System.out.println("Welcome to " + myGame.getDungeon().getName() + ". ");
          
+        /**
+         * following while loop asks user to enter the name of the .bork file to be loaded.  This file contains
+         * the dungeon information
+         */
+        String userFileName = "";
+        while (true)
+        {
+            System.out.println("Please enter the file name to be processed: ");
+            userFileName = in.nextLine();
+            System.out.println(userFileName);
+            break;
+        }
         
         /**
          * While loop asks user what do until 'q' is entered.
