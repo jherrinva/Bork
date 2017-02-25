@@ -1,5 +1,10 @@
 
 import java.util.Hashtable;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 
 /**
@@ -11,7 +16,7 @@ public class Dungeon
     private String name;
     public Hashtable<String, Room> roomCollection = new Hashtable<>();
     public Room dungeonEntry;
-    
+    private String fileName;
     
     /**
      * Constructor
@@ -27,7 +32,7 @@ public class Dungeon
     }
    
     
-    public Dungeon(String fileName)
+    public Dungeon(String fileName) throws FileNotFoundException, IOException
     {
         //needs to read the first line of .bork and use it as dungeon name
         //second line needs to have the literal line "Bork v2.0" exactly.
@@ -41,7 +46,141 @@ public class Dungeon
         //continues until === is found which begins exits
         
         
+        Scanner in = new Scanner(System.in);
+        String currentFileName = fileName;
+        
+        String currentLine = "";
+        int lineCounter = 1;
+        
+        Boolean stillOnRooms = true;
+        Boolean stillOnExits = false;
+        Boolean entryCreated = false;
+        
+        main:
+        while (true)  //main loop, can be restarted if file is incompatible with current Bork version
+        {
+            FileReader classFiler = new FileReader(currentFileName);
+            BufferedReader buffReader = new BufferedReader(classFiler);
+            
+            lineRead:
+            while ((currentLine = buffReader.readLine()) != null) //going through the file line by line
+            {
+
+                if (lineCounter == 1)
+                {
+                    this.name = currentLine;
+                    lineCounter++;
+                }
+
+                else if (lineCounter == 2)
+                {
+                    if (!currentLine.equals("Bork.v2.0"))
+                    {
+                        System.out.println("Your .bork file is not compatible with this programs version of Bork");
+                        System.out.println("Please enter the file name to be processed: ");
+                        currentFileName = in.nextLine();
+                        continue main;
+                    }
+                    else //after checking version is compatible, the dungeon objects fileName variable is set and confirmed
+                    {
+                        currentFileName = this.fileName;
+                    }
+                    lineCounter++;
+                    
+                    
+                }
+                else if (lineCounter == 3)
+                {
+                    lineCounter++; // 3rd line always the delimiter '===' and is unneccesary to process
+                    continue;
+                }
+                else if (lineCounter == 4)
+                {
+                    lineCounter++; //4th line always "Rooms: "  , and is to be thrown away
+                    continue;
+                }
+                else // code block containing room creation and exit creation
+                {
+                    while (stillOnRooms) //room creation block
+                    {
+                        if (currentLine.equals("==="))
+                        {
+                            stillOnRooms = false;
+                            stillOnExits = true;
+                        }
+                        else //create a room
+                        {
+                            String roomName = buffReader.readLine();
+                            String possiblyDescription = buffReader.readLine();
+                            String trashAccepter = "";
+                            
+                            if (!entryCreated) // if first room hasnt been created yet, use as dungeon entry
+                            {
+                                
+                                if (possiblyDescription.equals("---")) // if no descriptoin provided for room in file, do this
+                                {
+                                    Room theEntry = new Room(roomName);
+                                    this.dungeonEntry = theEntry;
+                                    roomCollection.put(this.dungeonEntry.getTitle(),this.dungeonEntry);
+                                    // create room with no description
+                                }
+                                else // this executes if the .bork file provides a description for the room
+                                {
+                                    Room theEntry = new Room(roomName);
+                                    theEntry.setDesc(possiblyDescription);
+                                    //create room and include String possiblyDescription
+                                    trashAccepter = buffReader.readLine();
+                                }
+                                
+                                
+                                entryCreated = true;
+                            }
+                            
+                            else //first room already created
+                            {
+                       
+                                if (possiblyDescription.equals("---")) // if no descriptoin provided for room in file, do this
+                                {
+                                    Room newRoom = new Room(roomName);
+                                    roomCollection.put(newRoom.getTitle(),newRoom);
+                                    // create room with no description
+                                }
+                                else // this executes if the .bork file provides a description for the room
+                                {
+                                    Room newRoom = new Room(roomName);
+                                    newRoom.setDesc(possiblyDescription);
+                                    roomCollection.put(newRoom.getTitle(),newRoom);
+                                    trashAccepter = buffReader.readLine();
+                                    //create room and include String possiblyDescription
+                                }
+                            }
+                            
+                        }
+                    }
+                    while (stillOnExits)
+                    {
+                        if (currentLine.equals("==="))
+                        {
+                            stillOnExits = false;
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                }
+                
+                
+                
+                
+                
+            }
+        }
+        
     }
+
+    
+    
     
     /**
      * Used to get info on dungeons entry

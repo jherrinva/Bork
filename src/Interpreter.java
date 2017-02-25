@@ -86,20 +86,19 @@ public class Interpreter
         
         Scanner in = new Scanner(System.in);
         String direction = "";
-        System.out.println("Welcome to " + myGame.getDungeon().getName() + ". ");
+        System.out.println("Welcome to " + myGame.getDungeon().getName() + ".");
          
         /**
-         * following while loop asks user to enter the name of the .bork file to be loaded.  This file contains
+         * asks user to enter the name of the .bork file to be loaded.  This file contains
          * the dungeon information
          */
-        String userFileName = "";
-        while (true)
-        {
-            System.out.println("Please enter the file name to be processed: ");
-            userFileName = in.nextLine();
-            System.out.println(userFileName);
-            break;
-        }
+        
+        System.out.println("Please enter the file name to be processed: ");
+        String userFileName = in.nextLine();
+        //Add line here using new dungeon constructor, using userFileName
+        //dont forget to reorganize myGame.initialize and use the new dungeon instead of buildSampleDungeon()
+        
+        
         
         /**
          * While loop asks user what do until 'q' is entered.
