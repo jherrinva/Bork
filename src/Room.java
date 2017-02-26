@@ -1,5 +1,8 @@
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -11,7 +14,7 @@ import java.util.Set;
  */
 public class Room 
 {
-    private String title;
+    private String title ="";
     private String desc;
     private boolean beenHere = false;
     public Hashtable<String, Exit> exitList = new Hashtable<>();
@@ -21,9 +24,38 @@ public class Room
      * Constructor for room
      * @param title Name of room
      */
-    public Room(String title)
+    protected Room(String title)
     {
         this.title = title;
+    }
+    
+    public Room (BufferedReader buffReader) throws IOException
+    {
+        
+        String currentLine;
+        
+        while ((currentLine = buffReader.readLine()) != null)
+        {
+            if (currentLine.equals("==="))
+            {
+                throw new EmptyStackException();
+            }
+            
+            else if (title.equals(""))
+            {
+                title = currentLine;
+            }
+            
+            else if (currentLine.equals("---")) //has reached end of room properties
+            {
+                break;
+            }
+            
+            else //if it gets here, the currentline must be a description for room
+            {
+                desc = currentLine;
+            }
+        }  
     }
     
     /**

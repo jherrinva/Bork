@@ -101,73 +101,41 @@ public class Dungeon
                 }
                 else // code block containing room creation and exit creation
                 {
-                    while (stillOnRooms) //room creation block
+                    try // keep creating rooms until Room class throws exception .... i.e., no more rooms to create
                     {
-                        if (currentLine.equals("==="))
-                        {
-                            stillOnRooms = false;
-                            stillOnExits = true;
-                        }
-                        else //create a room
-                        {
-                            String roomName = buffReader.readLine();
-                            String possiblyDescription = buffReader.readLine();
-                            String trashAccepter = "";
-                            
-                            if (!entryCreated) // if first room hasnt been created yet, use as dungeon entry
+                        while (stillOnRooms)
                             {
-                                
-                                if (possiblyDescription.equals("---")) // if no descriptoin provided for room in file, do this
+                                if (!entryCreated) // if first room hasnt been created yet, use as dungeon entry
                                 {
-                                    Room theEntry = new Room(roomName);
-                                    this.dungeonEntry = theEntry;
+                                    this.dungeonEntry = new Room (buffReader);
                                     roomCollection.put(this.dungeonEntry.getTitle(),this.dungeonEntry);
-                                    // create room with no description
+                                    entryCreated = true;
                                 }
-                                else // this executes if the .bork file provides a description for the room
+                                else
                                 {
-                                    Room theEntry = new Room(roomName);
-                                    theEntry.setDesc(possiblyDescription);
-                                    //create room and include String possiblyDescription
-                                    trashAccepter = buffReader.readLine();
-                                }
-                                
-                                
-                                entryCreated = true;
-                            }
-                            
-                            else //first room already created
-                            {
-                       
-                                if (possiblyDescription.equals("---")) // if no descriptoin provided for room in file, do this
-                                {
-                                    Room newRoom = new Room(roomName);
+                                    Room newRoom = new Room (buffReader);
                                     roomCollection.put(newRoom.getTitle(),newRoom);
-                                    // create room with no description
-                                }
-                                else // this executes if the .bork file provides a description for the room
-                                {
-                                    Room newRoom = new Room(roomName);
-                                    newRoom.setDesc(possiblyDescription);
-                                    roomCollection.put(newRoom.getTitle(),newRoom);
-                                    trashAccepter = buffReader.readLine();
-                                    //create room and include String possiblyDescription
                                 }
                             }
-                            
-                        }
+                        
+                    } catch (Exception e) {
+                        stillOnRooms = false;
+                        stillOnExits = true;
                     }
-                    while (stillOnExits)
+                    
+                    try  // keep creating exits until Exit class throws exception..... i.e. no more exits to create 
                     {
-                        if (currentLine.equals("==="))
-                        {
-                            stillOnExits = false;
-                        }
-                        else
+                        buffReader.readLine(); //catches trash line of "Exits:"
+                        while (stillOnExits)  //starts creating exits
                         {
                             
                         }
+                        
+                    } catch (Exception e) {
+                        stillOnExits = false;
                     }
+                    
+                    
                 }
                 
                 
