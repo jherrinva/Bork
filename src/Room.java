@@ -29,32 +29,48 @@ public class Room
         this.title = title;
     }
     
+    /**
+     * This constructor is able to read the lines of a .bork file to create a room from the information
+     * 
+     * @param buffReader  passed from Dungeon constructor, reads the lines of the file it contains
+     * @throws IOException 
+     */
     public Room (BufferedReader buffReader) throws IOException
     {
         
         String currentLine;
         
-        while ((currentLine = buffReader.readLine()) != null)
+        mainRoom:
+        while (true)
         {
+            currentLine = buffReader.readLine();
+            System.out.println("CurLine = " + currentLine);
             if (currentLine.equals("==="))
             {
                 throw new EmptyStackException();
             }
             
-            else if (title.equals(""))
-            {
-                title = currentLine;
-            }
             
-            else if (currentLine.equals("---")) //has reached end of room properties
-            {
-                break;
-            }
-            
-            else //if it gets here, the currentline must be a description for room
+            title = currentLine;
+            currentLine = buffReader.readLine();
+            if (!currentLine.equals("---"))
             {
                 desc = currentLine;
+                currentLine = buffReader.readLine();
+                //System.out.println("testCurDesc =   " + desc);
             }
+            else
+            {
+                break mainRoom;
+            }
+            
+            while (!currentLine.equals("---"))
+            {
+                desc+= " " + currentLine;
+                currentLine = buffReader.readLine();
+            }
+            System.out.println("testCurDesc =   " + desc);
+            break mainRoom;
         }  
     }
     

@@ -1,4 +1,9 @@
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.EmptyStackException;
+
+
 /**
  * Creates exits for dungeon rooms
  * @author John Herrin
@@ -16,12 +21,58 @@ public class Exit
      * @param src Room you are in that contains this exit
      * @param dest Room the exit leads to
      */
-    public Exit(String dir, Room src, Room dest)
+    protected Exit(String dir, Room src, Room dest)
     {
         this.dir = dir;
         this.source = src;
         this.destination = dest;
     }
+    
+    
+    public Exit(BufferedReader buffReader, Dungeon d) throws IOException
+    {
+        String currentLine;
+        System.out.println("its in exit constructor@!");
+        
+        while ((currentLine = buffReader.readLine()) != null)
+        {
+            if (currentLine.equals("==="))
+            {
+                throw new EmptyStackException();
+            }
+            
+            else //if not === delimiter, create exit with next 3 lines, and catch trash "---" delimeter
+            {
+                source = d.getRoom(currentLine);
+                System.out.println("It got the source!");
+                currentLine = buffReader.readLine();
+                dir = currentLine;
+                currentLine = buffReader.readLine();
+                destination = d.getRoom(currentLine);
+                System.out.println("Direction from " + source.getTitle() + "to " + destination.getTitle() + " is " + dir);
+                
+                
+                buffReader.readLine(); //catches trash "---" delimiter
+                break;
+            }
+            
+            
+            
+            // first line should source room title
+            //second line should be directino to take to leave by this exit
+            // third line should be destination room title
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      * Gets you info on where you can go

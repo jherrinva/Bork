@@ -69,12 +69,13 @@ public class Dungeon
                 if (lineCounter == 1)
                 {
                     this.name = currentLine;
+                    System.out.println(name);
                     lineCounter++;
                 }
 
                 else if (lineCounter == 2)
                 {
-                    if (!currentLine.equals("Bork.v2.0"))
+                    if (!currentLine.equals("Bork v2.0"))
                     {
                         System.out.println("Your .bork file is not compatible with this programs version of Bork");
                         System.out.println("Please enter the file name to be processed: ");
@@ -94,11 +95,13 @@ public class Dungeon
                     lineCounter++; // 3rd line always the delimiter '===' and is unneccesary to process
                     continue;
                 }
+                /**
                 else if (lineCounter == 4)
                 {
                     lineCounter++; //4th line always "Rooms: "  , and is to be thrown away
                     continue;
                 }
+                 */
                 else // code block containing room creation and exit creation
                 {
                     try // keep creating rooms until Room class throws exception .... i.e., no more rooms to create
@@ -110,29 +113,36 @@ public class Dungeon
                                     this.dungeonEntry = new Room (buffReader);
                                     roomCollection.put(this.dungeonEntry.getTitle(),this.dungeonEntry);
                                     entryCreated = true;
+                                    System.out.println("Created Entry! " + dungeonEntry.getTitle());
                                 }
                                 else
                                 {
                                     Room newRoom = new Room (buffReader);
                                     roomCollection.put(newRoom.getTitle(),newRoom);
+                                    System.out.println("Room created! " + newRoom.getTitle());
                                 }
                             }
                         
                     } catch (Exception e) {
                         stillOnRooms = false;
                         stillOnExits = true;
+                        System.out.println("end of room creation");
                     }
                     
                     try  // keep creating exits until Exit class throws exception..... i.e. no more exits to create 
                     {
-                        buffReader.readLine(); //catches trash line of "Exits:"
+                        System.out.println("Catchingexit trash " + buffReader.readLine()); //catches trash line of "Exits:"
                         while (stillOnExits)  //starts creating exits
                         {
-                            
+                            Exit newExit = new Exit(buffReader,this);
+                            newExit.getSrc().addExit(newExit);
+                            System.out.println("exit created!");
                         }
                         
                     } catch (Exception e) {
                         stillOnExits = false;
+                        System.out.println("end of exit creation");
+                        break main;
                     }
                     
                     

@@ -1,5 +1,6 @@
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -75,28 +76,26 @@ public class Interpreter
     
     
     
-    public static void main (String[] args)
+    public static void main (String[] args) throws IOException
     {   
-        
-        
-        GameState myGame = GameState.instance();
-        myGame.initialize(buildSampleDungeon());
-        CommandFactory myFactory = CommandFactory.instance();
-        
-        
         Scanner in = new Scanner(System.in);
-        String direction = "";
-        System.out.println("Welcome to " + myGame.getDungeon().getName() + ".");
-         
-        /**
-         * asks user to enter the name of the .bork file to be loaded.  This file contains
-         * the dungeon information
-         */
         
         System.out.println("Please enter the file name to be processed: ");
         String userFileName = in.nextLine();
-        //Add line here using new dungeon constructor, using userFileName
-        //dont forget to reorganize myGame.initialize and use the new dungeon instead of buildSampleDungeon()
+        Dungeon newDungeon = new Dungeon (userFileName);
+        
+        
+        
+        GameState myGame = GameState.instance();
+        myGame.initialize(newDungeon);
+        CommandFactory myFactory = CommandFactory.instance();
+        
+        
+        
+        String direction = "";
+        System.out.println("Welcome to " + myGame.getDungeon().getName() + ".");
+         
+        
         
         
         
