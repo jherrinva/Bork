@@ -1,3 +1,8 @@
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Singleton Class, containing information on current state of users dungeon crawl
  * @author John Herrin
@@ -69,6 +74,24 @@ public class GameState
     {
         return currentDungeon;
     }
+    
+ 
+    protected void store(String saveName) throws IOException
+    {
+        File myFile = new File(saveName);
+        myFile.createNewFile();
+        FileWriter myWriter = new FileWriter(myFile);
+        
+        
+        myWriter.write("Bork v2.0");
+        myWriter.write("Current room: " + getAdventurersCurrentRoom().getTitle());
+        
+        
+        myWriter.close();
+        
+        
+    }
+    
     
     
 }
