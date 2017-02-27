@@ -223,7 +223,20 @@ public class Dungeon
     
     protected void restoreState (BufferedReader w) throws IOException
     {
-        String currentLine = w.readLine();
+        String currentLine = w.readLine();//currently on Room states: now with this line
+        
+        while ((currentLine = w.readLine()) != null)//now on title of first room in .sav file  
+        {
+            if(currentLine.equals("==="))
+            {
+                break;
+            }
+            roomCollection.get(currentLine.substring(0,currentLine.length()-1)).restoreState();
+            w.readLine();//now on beenHere line.  thrown away
+            w.readLine();//now on '---' line.  thrown away
+            
+        }
+       
         //create loop looping through all rooms and calling restoreStte on each room
     }
 }

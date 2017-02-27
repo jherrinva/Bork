@@ -9,72 +9,7 @@ import java.util.Scanner;
  */
 public class Interpreter 
 {
-    /**
-     * Used to create a prebuilt dungeon
-     * @return prebuilt dungeon object
-     */
-    private static Dungeon buildSampleDungeon()
-    {
-        ////create rooms///////
-        Room livingRoom = new Room("Living Room");
-        Room bedroom = new Room("Bedroom");
-        Room closet = new Room("Closet");
-        Room kitchen = new Room("Kitchen");
-        Room pantry = new Room("Pantry");
-        //////////////////////////
-        
-        
-        
-        ////set descriptions////////////////
-        livingRoom.setDesc("This room is very colorful.  There is one chair, and a scary rabbit is sitting in it");
-        bedroom.setDesc("This room is very hot! But there are no windows");
-        closet.setDesc("This closet is bigger than the bedroom itself.  But all the clothes inside have been eaten by moths");
-        kitchen.setDesc("This place hasnt been cleaned in years.  There is a basketball in the sink for some reason");
-        pantry.setDesc("The cupboards are bare.  All thats left is an unopened twinkie.  Suprisingly in good condition");
-        /////////////////////////////////////
-        
-        
-        
-        ////////add exits to all rooms//////////////
-        Exit lrToBedroom = new Exit("w",livingRoom,bedroom);
-        livingRoom.addExit(lrToBedroom);
-        
-        Exit bedToLr = new Exit("e",bedroom,livingRoom);
-        bedroom.addExit(bedToLr);
-        
-        Exit bedToCloset = new Exit("w",bedroom,closet);
-        bedroom.addExit(bedToCloset);
-        
-        Exit closetToBed = new Exit("e",closet,bedroom);
-        closet.addExit(closetToBed);
-        
-        Exit lrToKitchen = new Exit("s",livingRoom,kitchen);
-        livingRoom.addExit(lrToKitchen);
-        
-        Exit kitchenToLr = new Exit("n",kitchen,livingRoom);
-        kitchen.addExit(kitchenToLr);
-        
-        Exit kitchenToPantry = new Exit("w",kitchen,pantry);
-        kitchen.addExit(kitchenToPantry);
-        
-        Exit pantryToKitchen = new Exit("e",pantry,kitchen);
-        pantry.addExit(pantryToKitchen);
-        
-        //////////////////////////////////////
-        
-        
-        
-        Dungeon sampleDungeon = new Dungeon(livingRoom,"John's Dungeon");
-        sampleDungeon.add(bedroom);
-        sampleDungeon.add(closet);
-        sampleDungeon.add(kitchen);
-        sampleDungeon.add(pantry);
-        
-        
-        return sampleDungeon;
-    }
-    
-    
+
     
     public static void main (String[] args) throws IOException
     {   

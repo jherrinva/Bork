@@ -162,5 +162,9 @@ public class Room
         }
     }
     
+    protected void restoreState()
+    {
+        beenHere = true;
+    }
     
 }
