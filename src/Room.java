@@ -1,6 +1,7 @@
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Hashtable;
@@ -16,7 +17,7 @@ public class Room
 {
     private String title ="";
     private String desc;
-    private boolean beenHere = false;
+    public boolean beenHere = false;
     public Hashtable<String, Exit> exitList = new Hashtable<>();
     
     
@@ -149,6 +150,16 @@ public class Room
     {
         exitList.put(exit.getDir(),exit);
         // creates exit object, adds to exit arraylist
+    }
+    
+    protected void storeState(PrintWriter w)
+    {
+        if (beenHere)
+        {
+            w.println(title + ":");
+            w.println("beenHere=true");
+            w.println("---");
+        }
     }
     
     

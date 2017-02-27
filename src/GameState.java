@@ -84,6 +84,9 @@ public class GameState
         
         
         myWriter.println("Bork v2.0");
+        currentDungeon.storeState(myWriter);
+        
+        //space here, because Current room should be last line written
         myWriter.println("Current room: " + getAdventurersCurrentRoom().getTitle());
         
         

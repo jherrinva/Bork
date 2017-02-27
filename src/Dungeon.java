@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Set;
 
 
 /**
@@ -84,7 +86,7 @@ public class Dungeon
                     }
                     else //after checking version is compatible, the dungeon objects fileName variable is set and confirmed
                     {
-                        currentFileName = this.fileName;
+                        this.fileName = currentFileName;
                     }
                     lineCounter++;
                     
@@ -199,5 +201,23 @@ public class Dungeon
         return roomToGet;
     }
     
+    protected void storeState(PrintWriter w)
+    {
+        w.println("Dungeon file: " + fileName);
+        w.println("Room states:");
+        
+        Set<String> roomKeys = roomCollection.keySet(); //adds all roomKeys inside hashtable to this set
+     
+        for (String theKey : roomKeys) // iterates through all roomKeys by the string keyvalues
+        {
+            roomCollection.get(theKey).storeState(w);       
+        }
+        
+        
+        //for loop for each room store() here
+        //insert check for beenHere =true
+        
+        w.println("===");
+    }
     
 }
