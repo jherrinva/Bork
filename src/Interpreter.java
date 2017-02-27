@@ -14,26 +14,50 @@ public class Interpreter
     public static void main (String[] args) throws IOException
     {   
         Scanner in = new Scanner(System.in);
-        
-        System.out.println("Please enter the file name to be processed: ");
-        String userFileName = in.nextLine();
-        //Dungeon newDungeon = new Dungeon (userFileName);
-        //need to check if line ends in .sav, .bork, or doesnt exist
-        
-        
         GameState myGame = GameState.instance();
-        //myGame.initialize(newDungeon); // remove this, move to GameState restore() method
         CommandFactory myFactory = CommandFactory.instance();
-        myGame.restore(userFileName);
+
+
+        
+        
+        
+        mainMethodAsk:
+        while(true)
+        {
+            System.out.println("Please enter the file name to be processed: ");
+            String userFileName = in.nextLine();    
+            
+           
+            
+            try
+            {
+                //if = user has a .sav file and wants to load dungeon and room data from it
+                if(userFileName.substring(userFileName.length()-4 , userFileName.length()).equals(".sav"))
+                {
+                    myGame.restore(userFileName);
+                    break;
+                }
+                else // user has .bork file, and wants to load a dungeon with no save data
+                {
+                    Dungeon newDungeon = new Dungeon (userFileName);
+                    myGame.initialize(newDungeon);
+                    break;
+                }
+               
+            }catch(Exception e)
+            {
+                System.out.println("Your file either doesnt exist, or you have not included the file extension.");
+                System.out.println("Valid extensions are only .sav and .bork");
+                System.out.println("Please try again");
+                System.out.println("__________________________________________________");
+                continue mainMethodAsk;
+            }
+            
+        }
         
         
         String direction = "";
         System.out.println("Welcome to " + myGame.getDungeon().getName() + ".");
-         
-        
-        
-        
-        
         /**
          * While loop asks user what do until 'q' is entered.
          */
