@@ -230,6 +230,6 @@ public class Dungeon
             
         }
        
-        //create loop looping through all rooms and calling restoreStte on each room
+        
     }
 }

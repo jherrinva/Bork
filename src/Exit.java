@@ -32,9 +32,10 @@ public class Exit
     public Exit(BufferedReader buffReader, Dungeon d) throws IOException
     {
         String currentLine;
-        
+
         while ((currentLine = buffReader.readLine()) != null)
         {
+            currentLine = buffReader.readLine();
             if (currentLine.equals("==="))
             {
                 throw new EmptyStackException();
@@ -47,9 +48,6 @@ public class Exit
                 dir = currentLine;
                 currentLine = buffReader.readLine();
                 destination = d.getRoom(currentLine);
-                
-                
-                buffReader.readLine(); //catches trash "---" delimiter
                 break;
             }
             

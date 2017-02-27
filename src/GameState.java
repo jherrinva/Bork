@@ -99,7 +99,7 @@ public class GameState
     }
     /**
      * Takes in .sav file to process.  Restores .sav data and creates the dungeon and rooms, with data 
-     * on which rooms were visited.
+     * on which rooms were visited, and where adventurer left off
      * @param fileName location of .sav file
      */
     protected void restore(String fileName) throws FileNotFoundException, IOException
@@ -116,9 +116,9 @@ public class GameState
         
         restoredDungeon.restoreState(saveReader);//call restore dungeon
         
+        currentSaveLine = saveReader.readLine();
+        setAdventurersCurrentRoom(currentDungeon.getRoom(currentSaveLine.substring(14,currentSaveLine.length()))); //set current room inside this class with last line
         
-        
-        //set current room inside this class with last line
     }
     
     
