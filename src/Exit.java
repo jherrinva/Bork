@@ -32,7 +32,6 @@ public class Exit
     public Exit(BufferedReader buffReader, Dungeon d) throws IOException
     {
         String currentLine;
-        System.out.println("its in exit constructor@!");
         
         while ((currentLine = buffReader.readLine()) != null)
         {
@@ -44,12 +43,10 @@ public class Exit
             else //if not === delimiter, create exit with next 3 lines, and catch trash "---" delimeter
             {
                 source = d.getRoom(currentLine);
-                System.out.println("It got the source!");
                 currentLine = buffReader.readLine();
                 dir = currentLine;
                 currentLine = buffReader.readLine();
                 destination = d.getRoom(currentLine);
-                System.out.println("Direction from " + source.getTitle() + "to " + destination.getTitle() + " is " + dir);
                 
                 
                 buffReader.readLine(); //catches trash "---" delimiter

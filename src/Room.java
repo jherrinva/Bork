@@ -45,7 +45,6 @@ public class Room
         while (true)
         {
             currentLine = buffReader.readLine();
-            System.out.println("CurLine = " + currentLine);
             if (currentLine.equals("==="))
             {
                 throw new EmptyStackException();
@@ -58,7 +57,6 @@ public class Room
             {
                 desc = currentLine;
                 currentLine = buffReader.readLine();
-                //System.out.println("testCurDesc =   " + desc);
             }
             else
             {
@@ -70,7 +68,6 @@ public class Room
                 desc+= " " + currentLine;
                 currentLine = buffReader.readLine();
             }
-            System.out.println("testCurDesc =   " + desc);
             break mainRoom;
         }  
     }
