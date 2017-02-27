@@ -82,14 +82,14 @@ public class Interpreter
         
         System.out.println("Please enter the file name to be processed: ");
         String userFileName = in.nextLine();
-        Dungeon newDungeon = new Dungeon (userFileName);
-        
+        //Dungeon newDungeon = new Dungeon (userFileName);
+        //need to check if line ends in .sav, .bork, or doesnt exist
         
         
         GameState myGame = GameState.instance();
-        myGame.initialize(newDungeon);
+        //myGame.initialize(newDungeon); // remove this, move to GameState restore() method
         CommandFactory myFactory = CommandFactory.instance();
-        
+        myGame.restore(userFileName);
         
         
         String direction = "";

@@ -220,4 +220,10 @@ public class Dungeon
         w.println("===");
     }
     
+    
+    protected void restoreState (BufferedReader w) throws IOException
+    {
+        String currentLine = w.readLine();
+        //create loop looping through all rooms and calling restoreStte on each room
+    }
 }

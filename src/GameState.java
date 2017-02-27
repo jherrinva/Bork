@@ -1,5 +1,8 @@
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -93,6 +96,29 @@ public class GameState
         myWriter.close();
         
         
+    }
+    /**
+     * Takes in .sav file to process.  Restores .sav data and creates the dungeon and rooms, with data 
+     * on which rooms were visited.
+     * @param fileName location of .sav file
+     */
+    protected void restore(String fileName) throws FileNotFoundException, IOException
+    {
+        FileReader saveFiler = new FileReader(fileName);
+        BufferedReader saveReader = new BufferedReader(saveFiler);
+        
+        String currentSaveLine = saveReader.readLine(); // read first line and skip
+        currentSaveLine = saveReader.readLine();         // second line contains dungeon file name
+        currentSaveLine = currentSaveLine.substring(14,currentSaveLine.length()); // trim to just .bork file name
+        
+        Dungeon restoredDungeon = new Dungeon (currentSaveLine);//create dungeon object with constructor, using 2nd line for .bork filename
+        initialize(restoredDungeon); // set this as the dungeon
+        
+        restoredDungeon.restoreState(saveReader);//call restore dungeon
+        
+        
+        
+        //set current room inside this class with last line
     }
     
     
