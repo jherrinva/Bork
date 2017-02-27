@@ -1,7 +1,7 @@
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Singleton Class, containing information on current state of users dungeon crawl
@@ -80,11 +80,11 @@ public class GameState
     {
         File myFile = new File(saveName);
         myFile.createNewFile();
-        FileWriter myWriter = new FileWriter(myFile);
+        PrintWriter myWriter = new PrintWriter(myFile);
         
         
-        myWriter.write("Bork v2.0");
-        myWriter.write("Current room: " + getAdventurersCurrentRoom().getTitle());
+        myWriter.println("Bork v2.0");
+        myWriter.println("Current room: " + getAdventurersCurrentRoom().getTitle());
         
         
         myWriter.close();

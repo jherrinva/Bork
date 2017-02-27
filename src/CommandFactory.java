@@ -18,6 +18,7 @@ public class CommandFactory
     private Command south = new Command ("s");
     private Command up  = new Command ("u");
     private Command down = new Command ("d");
+    private Command save = new Command ("save");
     
     ///add all commands to command list
     {
@@ -27,6 +28,7 @@ public class CommandFactory
     commandList.put("w",west);
     commandList.put("u",up);
     commandList.put("d",down);
+    commandList.put("save",save);
     }
     
     /**
