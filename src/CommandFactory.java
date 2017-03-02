@@ -55,7 +55,7 @@ public class CommandFactory
     /**
      * Takes in user command, sorts through hashtable of commands, and returns the correct command
      * @param commandString users command
-     * @return the command user waanted
+     * @return the command user wanted
      */
     protected Command parse(String commandString)
     {

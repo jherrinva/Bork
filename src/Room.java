@@ -17,8 +17,8 @@ public class Room
 {
     private String title ="";
     private String desc;
-    public boolean beenHere = false;
-    public Hashtable<String, Exit> exitList = new Hashtable<>();
+    private boolean beenHere = false;
+    private Hashtable<String, Exit> exitList = new Hashtable<>();
     
     
     /**

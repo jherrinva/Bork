@@ -16,8 +16,8 @@ import java.util.Set;
 public class Dungeon 
 {
     private String name;
-    public Hashtable<String, Room> roomCollection = new Hashtable<>();
-    public Room dungeonEntry;
+    private Hashtable<String, Room> roomCollection = new Hashtable<>();
+    private Room dungeonEntry;
     private String fileName;
     
     /**
