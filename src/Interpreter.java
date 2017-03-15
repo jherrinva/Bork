@@ -63,7 +63,6 @@ public class Interpreter
          */
         while (true)
         {
-           
             System.out.println(myGame.getAdventurersCurrentRoom().describe());
             System.out.print("\n<");
             direction = in.nextLine();
@@ -71,16 +70,9 @@ public class Interpreter
             {
                 break;
             }
-            boolean commandExists = myFactory.commandList.containsKey(direction);
-            if (commandExists)
-            {
-                myFactory.parse(direction).execute();
-            }
-            else
-            {
-                System.out.println("Unknown Command.  Please try again");
-            }
             
+            String commandMessageToPrint =  myFactory.parse(direction).execute();
+            System.out.println(commandMessageToPrint);
         }
 
 

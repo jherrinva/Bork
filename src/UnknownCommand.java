@@ -4,7 +4,7 @@
  *
  * @author John Herrin
  */
-public class UnknownCommand 
+public class UnknownCommand extends Command
 {
     
     private String bogusCommand;
@@ -14,9 +14,10 @@ public class UnknownCommand
         this.bogusCommand = bogusCommand;
     }
     
+    @Override
     protected String execute()
     {
-        
+        return bogusCommand;
     }
     
     

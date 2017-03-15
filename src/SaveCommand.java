@@ -12,13 +12,13 @@ import java.util.Scanner;
 public class SaveCommand extends Command
 {
  
-    Scanner saveIn = new Scanner (System.in); //new scanner to take in a new file name from user if filecreation triggeres an exception
+    Scanner saveIn = new Scanner (System.in); //new scanner to take in a new file name from user if filecreation triggers an exception
     
-    private String saveFilename; //filename.sav to be saved or overwritten
+    private String saveFilename; //starts as ".sav".  Updated by execute to contain final filename.  This is the filaname to be saved or overwritten
 
     /**
      * Constructor
-     * @param f filaname to be saved as field above
+     * @param f String ".sav" extension to be added to filename later in execute
      */
     protected SaveCommand(String f)
     {
@@ -27,12 +27,14 @@ public class SaveCommand extends Command
 
     /**
      * Overwritten abstract method from Command class
-     * This instance begins the process of saving/overwritting a save file of users progress
+     * This instance begins the process of saving/overwriting a save file of users progress
      * @return message indicating to user that the file has been saved
      */
     @Override
     protected String execute()
     {
+        this.saveFilename = GameState.instance().getDungeon().getName() + saveFilename;  //gets dungeon name, adds original String ".sav" to it
+        
         while(true)
         {
             try 
