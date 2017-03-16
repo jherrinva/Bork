@@ -11,7 +11,7 @@ public class CommandFactory
 {
     
     private static CommandFactory commandFactoryInstance = null;
-    public Hashtable<String, MovementCommand> movementCommandList = new Hashtable<>(); //list containing all objects that are subclasses obejcts of Command class
+    public Hashtable<String, MovementCommand> movementCommandList = new Hashtable<>(); //list containing all MovementCommand objects
     
     ///movementCommands below/////////////////
     private MovementCommand east = new MovementCommand("e");
@@ -84,11 +84,7 @@ public class CommandFactory
             return unknown;
         }
         
-        
-        //boolean commandExists = myFactory.movementCommandList.containsKey(direction);
-        
-        //Command tempCommand = movementCommandList.get(commandString);
-        //return tempCommand;
+       
     }
     
 }

@@ -46,7 +46,7 @@ public class SaveCommand extends Command
                 System.out.println("For some reason, your dungeons name is illegal as a saveFileName");
                 System.out.println("Below this, please do not use any special characters or spaces");
                 System.out.println("Please enter a new filename to use for your save: ");
-                saveFilename = saveIn.nextLine();
+                saveFilename = saveIn.nextLine() + ".sav";
                 continue;
             }
         }
