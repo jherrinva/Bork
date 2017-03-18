@@ -29,6 +29,8 @@ public class CommandFactory
     //only UnknownCommand below///////////////
     private UnknownCommand unknown = new UnknownCommand("Unknown Command");
     
+   
+    
     ///add all  MovementCommands to list
     {
     movementCommandList.put("n",north);
@@ -70,7 +72,7 @@ public class CommandFactory
         
         String[] commandName = commandString.split(" ");  // split commandString into a list of strings, based on when a space occurs
         
-        if(commandName[0].equals("save")) // if commandName list first index is "save" return save object
+        if(commandName[0].equalsIgnoreCase("save")) // if commandName list first index is "save" return save object
         {
             return save;
         }
@@ -108,6 +110,12 @@ public class CommandFactory
             }
         }
         
+        
+        else if (commandName[0].toLowerCase().equals("i") || commandName[0].toLowerCase().equals("inventory") ) //if user requesting to see their inventory 
+        {
+            InventoryCommand seeInventory = new InventoryCommand();
+            return seeInventory;
+        }
         
         else  //temporarily, this else will return the UnknownCommand object
         {
