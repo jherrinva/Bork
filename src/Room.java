@@ -60,6 +60,39 @@ public class Room
             
             title = currentLine;
             currentLine = buffReader.readLine();
+            
+            
+            
+            
+            ///////////////  CATCH CONTENTS LINE HERE/BELOW  /////////////////////////
+            String[] checkIfContentsLine = currentLine.split(": ");
+            
+            // if line begins with "Contents",  perform action
+            // Contents line could have been missing if the room has no items in .bork file, this is why this check must be made
+            if (checkIfContentsLine[0].equals("Contents")) 
+            {
+                if(initState) // if initstate=true, we are going ahead and adding items to rooms, as we are starting with a fresh dungeon
+                {
+                    String[] contentsOfRoom = checkIfContentsLine[1].split(",");
+                    
+                    for (String nameOfItem : contentsOfRoom)
+                    {
+                        this.add(d.getItem(nameOfItem)); //adds item to this room object, by accessing dungeon and getting item object with this name
+                    }
+                    
+                }
+                else // starting with a .sav file, but still need to handle the contents line.  i.e., passing it up
+                {
+                    currentLine = buffReader.readLine();
+                }
+            }
+            
+            
+            /////////////////////end of contents line checking////////////////////
+            
+            
+            
+            
             if (!currentLine.equals("---"))
             {
                 desc = currentLine;
