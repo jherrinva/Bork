@@ -32,7 +32,7 @@ public class Item
             
             else if(currentLine.equals("---")) //end of single item creation
             {
-                System.out.println("About to break from one item!");
+                //System.out.println("About to break from one item!");
                 break;
             }
             
@@ -49,11 +49,11 @@ public class Item
             }
             else //on verbs for an item
             {
-                System.out.println("doing verbs!");
+                //System.out.println("doing verbs!");
                 String[] entireVerbLine = currentLine.split(":");
                 messages.put(entireVerbLine[0],entireVerbLine[1]);
-                System.out.println(entireVerbLine[0]);
-                System.out.println(entireVerbLine[1]);
+                //System.out.println(entireVerbLine[0]);
+                //System.out.println(entireVerbLine[1]);
             }
             
             

@@ -110,21 +110,62 @@ public class GameState
         FileReader saveFiler = new FileReader(fileName);
         BufferedReader saveReader = new BufferedReader(saveFiler);
         
+        
         String currentSaveLine = saveReader.readLine(); // read first line and skip
-        currentSaveLine = saveReader.readLine();         // second line contains dungeon file name
+        currentSaveLine = saveReader.readLine(); // second line is "save data".  unimportant.  skip
+        currentSaveLine = saveReader.readLine();         // third line contains dungeon file name
         currentSaveLine = currentSaveLine.substring(14,currentSaveLine.length()); // trim to just .bork file name
         
-        Dungeon restoredDungeon = new Dungeon (currentSaveLine);//create dungeon object with constructor, using 2nd line for .bork filename
+        Dungeon restoredDungeon = new Dungeon (currentSaveLine, false);//create dungeon object with constructor, using 2nd line for .bork filename
         initialize(restoredDungeon); // set this as the dungeon
+        
         
         restoredDungeon.restoreState(saveReader);//call restore dungeon
         
-        currentSaveLine = saveReader.readLine();
+        //readline is on "===" still before the next call
+        currentSaveLine = saveReader.readLine(); // now on Adventurer: line after this call
+        currentSaveLine = saveReader.readLine(); // now on current room: after this call
+        
         setAdventurersCurrentRoom(currentDungeon.getRoom(currentSaveLine.substring(14,currentSaveLine.length()))); //set current room inside this class with last line
         
-        currentSaveLine = saveReader.readLine(); //after this readline call, now on Inventory: line
         
-        String[] inventoryItems = currentSaveLine.split(","); // String text of allitems in players inventory now in this list. will need to check for these item objects and add to actual item object list
+        
+        //Next line (Inventory:) may not exist if save was create with no items in players inventory
+        //Need to catch it with try/catch so it doesnt trigger a reset in Interpreter/main method
+        try 
+        {
+            currentSaveLine = saveReader.readLine(); //after this readline call, now on Inventory: line
+            String[] inventoryLineToSplit = currentSaveLine.split(": "); 
+            
+            if (inventoryLineToSplit[1].contains(",")) 
+            {
+                String[] inventoryItems = inventoryLineToSplit[1].split(",");
+                for (String anItem : inventoryItems)
+                {
+                    addToInventory(restoredDungeon.getItem(anItem));
+                    System.out.println("added " + anItem);
+                }
+                
+            }
+            else
+            {
+                addToInventory(restoredDungeon.getItem(inventoryLineToSplit[1]));
+            }
+
+
+            
+        } 
+        catch (Exception e) 
+        {
+            //nothing.  Inventory line didnt exist.  Move along, nothing to see here buddy
+        }
+        
+        
+        
+        
+        
+        
+        
         
         // AFTER RESTORESTATE CALLED ON DUNGEON, AND AFTER THE SETADVETURERESCURRENTOOM LINE,
          // CALL READLINE AGAIN

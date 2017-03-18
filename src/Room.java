@@ -214,19 +214,46 @@ public class Room
     
     protected void restoreState(BufferedReader s, Dungeon d) throws IOException
     {
+        
         String currentLine;
+        boolean beenHereSetAlready = false;
         while ((currentLine = s.readLine()) != null)
         {
             if(currentLine.equals("---")) //end of this rooms info to restore, get out
             {
                 break;
             }
-            if() // check if beenHere line
+            if(!beenHereSetAlready) //beenHere line always exists in .sav file.  
             {
-                
+                String[] beenHereLine = currentLine.split("=");
+                if (beenHereLine[1].equals("true"))
+                {
+                    this.beenHere = true; // no need to use else statement for false, as thats the default
+                }
+                beenHereSetAlready = true;
             }
-            else // obviosly on contents line here
+            else // If beenhere already set, and not on "---", you know current line will be Contentsline
             {
+                String[] contentsLineToSplit = currentLine.split(": ");
+                
+                //If there are multiple items in this line, will be seperated by comma.
+                //Single items on room, there will be no comma
+                //Therefore, need to check for it, or .split will break functionality.
+                if (contentsLineToSplit[1].contains(",")) 
+                {
+                    String[] contentsOfRoom = contentsLineToSplit[1].split(",");
+                    for (String anItem : contentsOfRoom)
+                    {
+                        this.add(d.getItem(anItem));
+                        System.out.println("added " + anItem);
+                    }
+                }
+                else // only one item, only need a simple room.add item line
+                {
+                    this.add(d.getItem(contentsLineToSplit[1]));
+                    System.out.println("added " + contentsLineToSplit[1]);
+                }
+                
                 
             }
             
@@ -241,7 +268,7 @@ public class Room
         // continue (which should eventually hit --- break)
          
         
-        beenHere = true;  // this method needs modifying later
+       
     }
     
     protected void add(Item item)

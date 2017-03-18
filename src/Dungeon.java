@@ -120,8 +120,6 @@ public class Dungeon
                     
                     try // keep creating rooms until Room class throws exception .... i.e., no more rooms to create
                     {
-                        System.out.println("Coming into room constructor, current line is next.");
-                        System.out.println(currentLine);
                         buffReader.readLine();
                         while (stillOnRooms)
                         {
@@ -247,8 +245,6 @@ public class Dungeon
                 break;
             }
             roomCollection.get(currentLine.substring(0,currentLine.length()-1)).restoreState(w,this);
-            //w.readLine();//now on beenHere line.  thrown away
-            //w.readLine();//now on '---' line.  thrown away
             
         }
     }
