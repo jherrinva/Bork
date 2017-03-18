@@ -107,7 +107,6 @@ public class GameState
             
             inventoryLine = inventoryLine.substring(0, inventoryLine.length() - 1); //cuts off last comma, which for loops add each itteration
             myWriter.println(inventoryLine);
-            System.out.println(inventoryLine);
         }
         
         myWriter.close();

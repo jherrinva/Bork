@@ -17,18 +17,27 @@ public class TakeCommand extends Command
     @Override
     protected String execute() 
     {
+        
+        
         Room roomToTakeFrom = GameState.instance().getAdventurersCurrentRoom();
         Item itemToTake = roomToTakeFrom.getItemNamed(itemName);
         
-        if (itemToTake == null)
+        if(itemName == null)
         {
-            return "There's no " + itemName + " here.";
+            return "\nTake what?\n";
         }
+        
+        else if(itemToTake == null)
+        {
+            return "\nThere's no " + itemName + " here.\n";
+        }
+        
+        
         else
         {
             roomToTakeFrom.remove(itemToTake);
             GameState.instance().addToInventory(itemToTake);
-            return itemName + " taken.";
+            return "\n" + itemName + " taken.\n";
         }
     }
     

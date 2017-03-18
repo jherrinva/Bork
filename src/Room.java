@@ -225,7 +225,7 @@ public class Room
             
             itemLine = itemLine.substring(0, itemLine.length() - 1); //cuts off last comma, which for loops add each itteration
             w.println(itemLine);
-            System.out.println(itemLine);
+            
         }
         
         w.println("---");
@@ -278,15 +278,6 @@ public class Room
             
         }
         
-        //need while loop with .readline
-        // if ---, break
-        // check if line begins with beenHere
-                // if so , check if last 4 of the line is true.  if so, set beenhere to true
-        // else , split line on a colon+space, split the second index again on comma
-                //then iterate through every index of second list to set this rooms contents, calling add item
-        // continue (which should eventually hit --- break)
-         
-        
        
     }
     
@@ -304,7 +295,7 @@ public class Room
     {
         for(Item item : contents)
         {
-            if (item.getPrimaryName().equals(name))
+            if (item.getPrimaryName().equalsIgnoreCase(name))
             {
                 return item;
             }

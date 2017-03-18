@@ -65,7 +65,7 @@ public class Item
     
     public boolean goesBy(String name)
     {
-        if(primaryName.equals(name))
+        if(primaryName.equalsIgnoreCase(name))
         {
             return true;
         }

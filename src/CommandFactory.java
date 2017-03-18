@@ -81,10 +81,32 @@ public class CommandFactory
         
         else if(commandName[0].toLowerCase().equals("take")) //if user requesting to take something
         {
-            TakeCommand attemptToTake = new TakeCommand(commandName[1]);
-            return attemptToTake;
+            if (commandName.length < 2)
+            {
+                TakeCommand attemptToTake = new TakeCommand(null);
+                return attemptToTake;
+            }
+            else
+            {
+                TakeCommand attemptToTake = new TakeCommand(commandName[1]);
+                return attemptToTake;
+            }
+            
         }
         
+        else if(commandName[0].toLowerCase().equals("drop")) //if user requesting to drop something
+        {
+            if (commandName.length < 2)
+            {
+                DropCommand attemptToDrop = new DropCommand(null);
+                return attemptToDrop;
+            }
+            else
+            {
+                DropCommand attemptToDrop = new DropCommand(commandName[1]);
+                return attemptToDrop;
+            }
+        }
         
         
         else  //temporarily, this else will return the UnknownCommand object
