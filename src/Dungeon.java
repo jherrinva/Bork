@@ -17,6 +17,7 @@ public class Dungeon
 {
     private String name;
     private Hashtable<String, Room> roomCollection = new Hashtable<>();
+    private Hashtable<String, Item> itemCollection = new Hashtable<>();
     private Room dungeonEntry;
     private String fileName;
     
@@ -34,19 +35,8 @@ public class Dungeon
     }
    
     
-    public Dungeon(String fileName) throws FileNotFoundException, IOException
+    public Dungeon(String fileName, boolean initState) throws FileNotFoundException, IOException
     {
-        //needs to read the first line of .bork and use it as dungeon name
-        //second line needs to have the literal line "Bork v2.0" exactly.
-        //if match, needs to throw away the line and continue
-        //if no match, needs to print an error message indicating dungeon file is not 
-        //compatible, and exit the program
-        //third line will be === dilimiter, this is when room construction begins
-        //4th line is "Rooms:"    throw this away to
-        // first line of each room will be room title
-        //all following lines will be room description until --- is found, which denotes next room
-        //continues until === is found which begins exits
-        
         
         Scanner in = new Scanner(System.in);
         String currentFileName = fileName;
@@ -54,7 +44,8 @@ public class Dungeon
         String currentLine = "";
         int lineCounter = 1;
         
-        Boolean stillOnRooms = true;
+        Boolean stillOnItems = true;
+        Boolean stillOnRooms = false;
         Boolean stillOnExits = false;
         Boolean entryCreated = false;
         
@@ -76,7 +67,7 @@ public class Dungeon
 
                 else if (lineCounter == 2)
                 {
-                    if (!currentLine.equals("Bork v2.0"))
+                    if (!currentLine.equals("Bork v3.0"))
                     {
                         System.out.println("Your .bork file is not compatible with this programs version of Bork");
                         System.out.println("Please enter the file name to be processed: ");
@@ -103,29 +94,58 @@ public class Dungeon
                     continue;
                 }
                  */
-                else // code block containing room creation and exit creation
+                else // code block containing item creation, room creation and exit creation
                 {
+                    
+                    
+                    
+                    try// keep creating items until Item class throws exception .... i.e., no more items to create
+                    {
+                        while (stillOnItems)
+                        {
+                            Item newItem = new Item(buffReader);
+                            this.add(newItem);
+                        }
+                    } 
+                    catch (Exception e) 
+                    {
+                        stillOnItems = false;
+                        stillOnRooms = true;
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
                     try // keep creating rooms until Room class throws exception .... i.e., no more rooms to create
                     {
                         while (stillOnRooms)
+                        {
+                            if (!entryCreated) // if first room hasnt been created yet, use as dungeon entry
                             {
-                                if (!entryCreated) // if first room hasnt been created yet, use as dungeon entry
-                                {
-                                    this.dungeonEntry = new Room (buffReader);
-                                    roomCollection.put(this.dungeonEntry.getTitle(),this.dungeonEntry);
-                                    entryCreated = true;
-                                }
-                                else
-                                {
-                                    Room newRoom = new Room (buffReader);
-                                    roomCollection.put(newRoom.getTitle(),newRoom);
-                                }
+                                this.dungeonEntry = new Room (buffReader, this, initState);
+                                roomCollection.put(this.dungeonEntry.getTitle(),this.dungeonEntry);
+                                entryCreated = true;
                             }
-                        
-                    } catch (Exception e) {
+                            else
+                            {
+                                Room newRoom = new Room (buffReader, this, initState);
+                                roomCollection.put(newRoom.getTitle(),newRoom);
+                            }
+                        }
+                    } 
+                    catch (Exception e) 
+                    {
                         stillOnRooms = false;
                         stillOnExits = true;
                     }
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     try  // keep creating exits until Exit class throws exception..... i.e. no more exits to create 
                     {
@@ -134,22 +154,20 @@ public class Dungeon
                             Exit newExit = new Exit(buffReader,this);
                             newExit.getSrc().addExit(newExit);
                         }
-                        
-                    } catch (Exception e) {
+                    } 
+                    catch (Exception e) 
+                    {
                         stillOnExits = false;
                         break main;
                     }
                     
                     
+                    
+                    
+                    
                 }
-                
-                
-                
-                
-                
             }
         }
-        
     }
 
     
@@ -224,12 +242,25 @@ public class Dungeon
             {
                 break;
             }
-            roomCollection.get(currentLine.substring(0,currentLine.length()-1)).restoreState();
-            w.readLine();//now on beenHere line.  thrown away
-            w.readLine();//now on '---' line.  thrown away
+            roomCollection.get(currentLine.substring(0,currentLine.length()-1)).restoreState(w,this);
+            //w.readLine();//now on beenHere line.  thrown away
+            //w.readLine();//now on '---' line.  thrown away
             
         }
-       
-        
     }
+    
+    public Item getItem(String primaryName)
+    {
+        return itemCollection.get(primaryName);   
+    }
+    
+    public void add(Item item)
+    {
+        itemCollection.put(item.getPrimaryName(), item);
+    }
+    
+    
+    
+    
+    
 }

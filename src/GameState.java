@@ -119,6 +119,15 @@ public class GameState
         currentSaveLine = saveReader.readLine();
         setAdventurersCurrentRoom(currentDungeon.getRoom(currentSaveLine.substring(14,currentSaveLine.length()))); //set current room inside this class with last line
         
+        currentSaveLine = saveReader.readLine(); //after this readline call, now on Inventory: line
+        
+        String[] inventoryItems = currentSaveLine.split(","); // String text of allitems in players inventory now in this list. will need to check for these item objects and add to actual item object list
+        
+        // AFTER RESTORESTATE CALLED ON DUNGEON, AND AFTER THE SETADVETURERESCURRENTOOM LINE,
+         // CALL READLINE AGAIN
+         //BUFFERED READER SHOULD NOW ON THE .SAV FILES INVENTORY LINE 
+           /// THIS NEEDS TO THEN ADD THE FOLLOWING ITEMS TO PLAYERS INVENTORY IN THIS .JAVA 
+        
     }
     
     

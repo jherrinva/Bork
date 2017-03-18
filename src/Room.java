@@ -41,12 +41,16 @@ public class Room
      */
     public Room (BufferedReader buffReader, Dungeon d, boolean initState) throws IOException
     {
-        
+        //  ROOM CONSTRUCTOR NEEDS TO USE INITSTATE TO FIGURE OUT IF ITEMS ADDED TO ROOMS YET
         String currentLine;
         
         mainRoom:
         while (true)
         {
+            
+            
+            
+            
             currentLine = buffReader.readLine();
             if (currentLine.equals("==="))
             {
@@ -72,6 +76,12 @@ public class Room
                 currentLine = buffReader.readLine();
             }
             break mainRoom;
+            
+            
+            
+            
+            
+            
         }  
     }
     
@@ -171,8 +181,35 @@ public class Room
         }
     }
     
-    protected void restoreState(BufferedReader s, Dungeon d)
+    protected void restoreState(BufferedReader s, Dungeon d) throws IOException
     {
+        String currentLine;
+        while ((currentLine = s.readLine()) != null)
+        {
+            if(currentLine.equals("---")) //end of this rooms info to restore, get out
+            {
+                break;
+            }
+            if() // check if beenHere line
+            {
+                
+            }
+            else // obviosly on contents line here
+            {
+                
+            }
+            
+        }
+        
+        //need while loop with .readline
+        // if ---, break
+        // check if line begins with beenHere
+                // if so , check if last 4 of the line is true.  if so, set beenhere to true
+        // else , split line on a colon+space, split the second index again on comma
+                //then iterate through every index of second list to set this rooms contents, calling add item
+        // continue (which should eventually hit --- break)
+         
+        
         beenHere = true;  // this method needs modifying later
     }
     
