@@ -89,12 +89,26 @@ public class GameState
         PrintWriter myWriter = new PrintWriter(myFile);
         
         
-        myWriter.println("Bork v2.0");
+        myWriter.println("Bork v3.0");
+        myWriter.println("save data");
         currentDungeon.storeState(myWriter);
         
-        //space here, because Current room should be last line written
+        
+        myWriter.println("Adventurer:");
         myWriter.println("Current room: " + getAdventurersCurrentRoom().getTitle());
         
+        if(!inventory.isEmpty()) //if player has items in inventory, write to .sav file
+        {
+            String inventoryLine = "Inventory: ";
+            for(String anItem : getInventoryNames())
+            {
+                inventoryLine+= anItem + ",";
+            }
+            
+            inventoryLine = inventoryLine.substring(0, inventoryLine.length() - 1); //cuts off last comma, which for loops add each itteration
+            myWriter.println(inventoryLine);
+            System.out.println(inventoryLine);
+        }
         
         myWriter.close();
         
@@ -159,19 +173,6 @@ public class GameState
         {
             //nothing.  Inventory line didnt exist.  Move along, nothing to see here buddy
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        // AFTER RESTORESTATE CALLED ON DUNGEON, AND AFTER THE SETADVETURERESCURRENTOOM LINE,
-         // CALL READLINE AGAIN
-         //BUFFERED READER SHOULD NOW ON THE .SAV FILES INVENTORY LINE 
-           /// THIS NEEDS TO THEN ADD THE FOLLOWING ITEMS TO PLAYERS INVENTORY IN THIS .JAVA 
-        
     }
     
     

@@ -204,12 +204,31 @@ public class Room
     
     protected void storeState(PrintWriter w)
     {
+        w.println(title + ":");
+        
         if (beenHere)
         {
-            w.println(title + ":");
             w.println("beenHere=true");
-            w.println("---");
         }
+        else
+        {
+            w.println("beenHere=false");
+        }
+        
+        if (!contents.isEmpty()) //if there are items still contained in room, add them to .sav file for this room
+        {
+            String itemLine = "Contents: ";
+            for(Item anItem : getContents())
+            {
+                itemLine+= anItem.getPrimaryName() + ",";
+            }
+            
+            itemLine = itemLine.substring(0, itemLine.length() - 1); //cuts off last comma, which for loops add each itteration
+            w.println(itemLine);
+            System.out.println(itemLine);
+        }
+        
+        w.println("---");
     }
     
     protected void restoreState(BufferedReader s, Dungeon d) throws IOException

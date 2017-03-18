@@ -226,11 +226,7 @@ public class Dungeon
             roomCollection.get(theKey).storeState(w);       
         }
         
-        
-        //for loop for each room store() here
-        //insert check for beenHere =true
-        
-        w.println("===");
+        w.println("==="); //adds delimeter after all room states stored to file
     }
     
     
