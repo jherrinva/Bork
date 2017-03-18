@@ -79,6 +79,14 @@ public class CommandFactory
             return movementCommandList.get(commandString);
         }
         
+        else if(commandName[0].toLowerCase().equals("take")) //if user requesting to take something
+        {
+            TakeCommand attemptToTake = new TakeCommand(commandName[1]);
+            return attemptToTake;
+        }
+        
+        
+        
         else  //temporarily, this else will return the UnknownCommand object
         {
             return unknown;
