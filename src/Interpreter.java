@@ -59,7 +59,7 @@ public class Interpreter
         String direction = "";
         System.out.println("Welcome to " + myGame.getDungeon().getName() + ".");
         /**
-         * While loop asks user what do until 'q' is entered.
+         * While loop asks user what to do until 'q' is entered.
          */
         while (true)
         {

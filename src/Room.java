@@ -19,6 +19,7 @@ public class Room
     private String desc;
     private boolean beenHere = false;
     private Hashtable<String, Exit> exitList = new Hashtable<>();
+    ArrayList<Item> itemList = new ArrayList<>();
     
     
     /**
@@ -34,9 +35,11 @@ public class Room
      * This constructor is able to read the lines of a .bork file to create a room from the information
      * 
      * @param buffReader  passed from Dungeon constructor, reads the lines of the file it contains
+     * @param d dungeon being passed in
+     * @param initState  hydrating from .sav file?
      * @throws IOException 
      */
-    public Room (BufferedReader buffReader) throws IOException
+    public Room (BufferedReader buffReader, Dungeon d, boolean initState) throws IOException
     {
         
         String currentLine;
@@ -159,9 +162,38 @@ public class Room
         }
     }
     
-    protected void restoreState()
+    protected void restoreState(BufferedReader s, Dungeon d)
     {
-        beenHere = true;
+        beenHere = true;  // this method needs modifying later
     }
+    
+    protected void add(Item item)
+    {
+        itemList.add(item);
+    }
+    
+    protected void remove (Item item)
+    {
+        itemList.remove(item);
+    }
+    
+    protected Item getItemNamed(String name)
+    {
+        for(Item item : itemList)
+        {
+            if (item.getPrimaryName().equals(name))
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+    
+    protected ArrayList<Item> getContents()
+    {
+        return itemList;
+    }
+    
+    
     
 }
