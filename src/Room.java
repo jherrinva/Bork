@@ -103,6 +103,13 @@ public class Room
         
         Set<String> keys = exitList.keySet(); //adds all keys inside hashtable to this set
         String exitDescriptions = "";
+        String toPrintItemsInRoom = "";
+        
+        for (Item item : itemList)
+        {
+            toPrintItemsInRoom += "There is a " + item.getPrimaryName() + " here.  ";
+        }
+        
         
         for (String theKey : keys) // iterates through all keys by the string keyvalues
         {
@@ -112,11 +119,13 @@ public class Room
         if (!beenHere)
         {
             beenHere = true;
-            return "You are in the " + title + ". " + desc + ". " + exitDescriptions;
+            return "You are in the " + title + ". " + desc + ".\n " + exitDescriptions +
+                    "\n" + toPrintItemsInRoom;
         }   
         else 
         {
-            return ("You are in the " + title + ". " + exitDescriptions);
+            return ("You are in the " + title + ".\n" + exitDescriptions +
+                    "\n" + toPrintItemsInRoom);
         }
         
         
