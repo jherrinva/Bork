@@ -19,7 +19,7 @@ public class Room
     private String desc;
     private boolean beenHere = false;
     private Hashtable<String, Exit> exitList = new Hashtable<>();
-    ArrayList<Item> itemList = new ArrayList<>();
+    ArrayList<Item> contents = new ArrayList<>();
     
     
     /**
@@ -146,7 +146,7 @@ public class Room
         String exitDescriptions = "";
         String toPrintItemsInRoom = "";
         
-        for (Item item : itemList)
+        for (Item item : contents)
         {
             toPrintItemsInRoom += "There is a " + item.getPrimaryName() + " here.  ";
         }
@@ -246,17 +246,17 @@ public class Room
     
     protected void add(Item item)
     {
-        itemList.add(item);
+        contents.add(item);
     }
     
     protected void remove (Item item)
     {
-        itemList.remove(item);
+        contents.remove(item);
     }
     
     protected Item getItemNamed(String name)
     {
-        for(Item item : itemList)
+        for(Item item : contents)
         {
             if (item.getPrimaryName().equals(name))
             {
@@ -268,7 +268,7 @@ public class Room
     
     protected ArrayList<Item> getContents()
     {
-        return itemList;
+        return contents;
     }
     
     

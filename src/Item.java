@@ -65,9 +65,17 @@ public class Item
     
     public boolean goesBy(String name)
     {
-        //will use later in items future
-        return true;
+        if(primaryName.equals(name))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
+    
+    
     
     public String getPrimaryName()
     {

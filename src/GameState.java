@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * Singleton Class, containing information on current state of users dungeon crawl
@@ -16,6 +17,8 @@ public class GameState
     private static GameState gameStateInstance = null;
     private Dungeon currentDungeon;
     private Room currentRoom;
+    ArrayList<Item> inventory = new ArrayList<>();
+    
     
     /**
      * Private constructor for singleton class
@@ -131,5 +134,73 @@ public class GameState
     }
     
     
+    protected ArrayList<String> getInventoryNames()
+    {
+        ArrayList<String> namesOfItemsInInventory = new ArrayList<>();
+        
+        for (Item theItem : inventory)
+        {
+            namesOfItemsInInventory.add(theItem.getPrimaryName());
+        }
+        return namesOfItemsInInventory;
+    }
+    
+    /**
+     * Adds item to players inventory arraylist
+     * @param item Item to add
+     */
+    protected void addToInventory(Item item)
+    {
+        inventory.add(item);
+    }
+    
+    /**
+     * Removes item from players inventory arraylist
+     * @param item Item to remove
+     */
+    protected void removeFromInventory(Item item)    
+    {
+        inventory.remove(item);
+    }
+    
+    
+
+    
+    /**
+     * This method looks in the players inventory AND the playersCurrentRoom for an item
+     * @param name Title of item to look for
+     * @return Item object found.  Null if not found in either
+     */
+    protected Item getItemInVicinityNamed(String name)
+    {
+        Item itemToGet = getAdventurersCurrentRoom().getItemNamed(name);
+        
+        if (itemToGet == null)
+        {
+            itemToGet = getItemFromInventoryNamed(name);
+        }
+        
+        return itemToGet;
+    }
+    
+    
+    /**
+     * Checks only players inventory for certain item name
+     * @param name name of item to look for in inventory
+     * @return Item to return if found in invetory.  Null if not there
+     */
+    protected Item getItemFromInventoryNamed(String name)
+    {
+        for (Item anItem : inventory)
+        {
+            if(anItem.goesBy(name))
+            {
+                return anItem;
+            }
+        }
+        
+        return null;
+    }
+        
     
 }

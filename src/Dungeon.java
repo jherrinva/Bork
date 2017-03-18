@@ -17,7 +17,7 @@ public class Dungeon
 {
     private String name;
     private Hashtable<String, Room> roomCollection = new Hashtable<>();
-    private Hashtable<String, Item> itemCollection = new Hashtable<>();
+    private Hashtable<String, Item> items = new Hashtable<>();
     private Room dungeonEntry;
     private String fileName;
     
@@ -255,12 +255,12 @@ public class Dungeon
     
     public Item getItem(String primaryName)
     {
-        return itemCollection.get(primaryName);   
+        return items.get(primaryName);   
     }
     
     public void add(Item item)
     {
-        itemCollection.put(item.getPrimaryName(), item);
+        items.put(item.getPrimaryName(), item);
     }
     
     
