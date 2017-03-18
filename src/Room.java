@@ -47,11 +47,9 @@ public class Room
         mainRoom:
         while (true)
         {
-            
-            
-            
-            
             currentLine = buffReader.readLine();
+
+            
             if (currentLine.equals("==="))
             {
                 throw new EmptyStackException();
@@ -81,10 +79,10 @@ public class Room
                     }
                     
                 }
-                else // starting with a .sav file, but still need to handle the contents line.  i.e., passing it up
-                {
-                    currentLine = buffReader.readLine();
-                }
+               
+                
+                currentLine = buffReader.readLine(); //move on from contents line
+                
             }
             
             
@@ -162,7 +160,7 @@ public class Room
         if (!beenHere)
         {
             beenHere = true;
-            return "You are in the " + title + ". " + desc + ".\n " + exitDescriptions +
+            return "You are in the " + title + ". " + desc + "\n" + exitDescriptions +
                     "\n" + toPrintItemsInRoom;
         }   
         else 

@@ -38,13 +38,13 @@ public class Item
             
             else if (!nameAndWeightDone) //setting primaryName and weight for an item
             {
-                System.out.println("setting name and weight!");
+                //System.out.println("setting name and weight!");
                 this.primaryName = currentLine;
                 currentLine = s.readLine();
                 this.weight = Integer.parseInt(currentLine);
                 nameAndWeightDone = true;
-                System.out.println(primaryName);
-                System.out.println(weight);
+                //System.out.println(primaryName);
+                //System.out.println(weight);
                 continue;
             }
             else //on verbs for an item

@@ -120,8 +120,12 @@ public class Dungeon
                     
                     try // keep creating rooms until Room class throws exception .... i.e., no more rooms to create
                     {
+                        System.out.println("Coming into room constructor, current line is next.");
+                        System.out.println(currentLine);
+                        buffReader.readLine();
                         while (stillOnRooms)
                         {
+                            
                             if (!entryCreated) // if first room hasnt been created yet, use as dungeon entry
                             {
                                 this.dungeonEntry = new Room (buffReader, this, initState);

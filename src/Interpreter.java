@@ -39,7 +39,7 @@ public class Interpreter
                 }
                 else // user has .bork file, and wants to load a dungeon with no save data
                 {
-                    Dungeon newDungeon = new Dungeon (userFileName);
+                    Dungeon newDungeon = new Dungeon (userFileName, true);
                     myGame.initialize(newDungeon);
                     break;
                 }
