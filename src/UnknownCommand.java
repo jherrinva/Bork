@@ -17,7 +17,7 @@ public class UnknownCommand extends Command
     @Override
     protected String execute()
     {
-        return bogusCommand;
+        return "\n" + bogusCommand + "\n";
     }
     
     

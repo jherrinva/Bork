@@ -1,5 +1,6 @@
 
 import java.util.Hashtable;
+import java.util.Set;
 
 
 
@@ -117,9 +118,55 @@ public class CommandFactory
             return seeInventory;
         }
         
-        else  //temporarily, this else will return the UnknownCommand object
+        else  //check each item in dungeon and see if commandName[0] matches any items verb command.  if not, return unknown command
         {
-            return unknown;
+            
+            
+            Hashtable<String, Item> tempItemTable = GameState.instance().getDungeon().getItemHashtable();
+            Set<String> itemKeys = tempItemTable.keySet();
+            boolean foundAnItem = false;
+            
+            for (String theKey : itemKeys) // iterates through all itemKeys by the string keyvalues
+            {
+                String theKeyWithAmessage = tempItemTable.get(theKey).getMessageForVerb(commandName[0]);
+                if (theKeyWithAmessage!=null)
+                {
+                    foundAnItem = true;
+                    break;
+                }
+            }
+            
+            if(foundAnItem && commandName.length > 1)
+            {
+                ItemSpecificCommand iscCommand = new ItemSpecificCommand(commandName[0], commandName[1]);
+                return iscCommand;
+                //call ISC with 1st and 2nd index
+            }
+            else if (foundAnItem && commandName.length < 2)
+            {
+                ItemSpecificCommand iscCommand = new ItemSpecificCommand(commandName[0], "null");
+                return iscCommand;
+                //call ISC with "null" as second param
+            }
+            
+            //if (theKeyWithAmessage!=null && tempItemTable.get(theKey).getPrimaryName().equals(commandName[1])) // if a message is found for the verb(firstword in users request) AND the verb is matched to correct item in the second word of users request, do this
+            else
+            {
+                return unknown;    
+            }
+            
+            /**
+            
+            if(commandName.length > 1)
+            {
+                GameState.instance().getItemInVicinityNamed(commandName[1]);
+                return unknown;
+            }
+            else
+            {
+                return unknown;
+            }
+            */
         }
         
        

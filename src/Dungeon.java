@@ -255,7 +255,10 @@ public class Dungeon
         items.put(item.getPrimaryName(), item);
     }
     
-    
+    public Hashtable<String, Item> getItemHashtable()
+    {
+        return items;
+    }
     
     
     
