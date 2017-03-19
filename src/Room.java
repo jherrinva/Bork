@@ -77,15 +77,9 @@ public class Room
                     {
                         this.add(d.getItem(nameOfItem)); //adds item to this room object, by accessing dungeon and getting item object with this name
                     }
-                    
                 }
-               
-                
-                currentLine = buffReader.readLine(); //move on from contents line
-                
+                currentLine = buffReader.readLine(); //move on from contents line  
             }
-            
-            
             /////////////////////end of contents line checking////////////////////
             
             
@@ -107,14 +101,9 @@ public class Room
                 currentLine = buffReader.readLine();
             }
             break mainRoom;
-            
-            
-            
-            
-            
-            
         }  
     }
+    
     
     /**
      * Returns string containing title of room
@@ -202,6 +191,11 @@ public class Room
         // creates exit object, adds to exit arraylist
     }
     
+    
+    /**
+     * This method used in process of storing users progress to a .sav file.  Pertains to room info
+     * @param w current file being written to
+     */
     protected void storeState(PrintWriter w)
     {
         w.println(title + ":");
@@ -231,6 +225,12 @@ public class Room
         w.println("---");
     }
     
+    /**
+     * THis method used in process of restoring users previous dungeon crawl.  Pertains to room info
+     * @param s current .sav file being read
+     * @param d dungeon object to get info from and modify
+     * @throws IOException 
+     */
     protected void restoreState(BufferedReader s, Dungeon d) throws IOException
     {
         
@@ -264,33 +264,41 @@ public class Room
                     for (String anItem : contentsOfRoom)
                     {
                         this.add(d.getItem(anItem));
-                        System.out.println("added " + anItem);
                     }
                 }
                 else // only one item, only need a simple room.add item line
                 {
                     this.add(d.getItem(contentsLineToSplit[1]));
-                    System.out.println("added " + contentsLineToSplit[1]);
                 }
-                
-                
-            }
-            
+            }    
         }
-        
-       
     }
     
+    
+    /**
+     * Adds item to Room object
+     * @param item item to add
+     */
     protected void add(Item item)
     {
         contents.add(item);
     }
     
+    /**
+     * Removes item from room object
+     * @param item item to remove
+     */
     protected void remove (Item item)
     {
         contents.remove(item);
     }
     
+    
+    /**
+     * Checks for item in room object
+     * @param name name of object to check for
+     * @return object found, null if object doesnt exist in room
+     */
     protected Item getItemNamed(String name)
     {
         for(Item item : contents)
@@ -303,11 +311,13 @@ public class Room
         return null;
     }
     
+    /**
+     * Get list of all item objects contained in this room object
+     * @return list of item objects in room
+     */
     protected ArrayList<Item> getContents()
     {
         return contents;
     }
-    
-    
     
 }

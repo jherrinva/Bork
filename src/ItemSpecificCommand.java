@@ -1,7 +1,7 @@
 
 
 /**
- *
+ * This class processes a users request to use an item with a specific verb
  * @author John Herrin
  */
 public class ItemSpecificCommand extends Command
@@ -9,12 +9,21 @@ public class ItemSpecificCommand extends Command
     private String verb;
     private String noun;
     
+    /**
+     * constructor
+     * @param verb What to do to the noun/item requested
+     * @param noun  Item to use verb on
+     */
     protected ItemSpecificCommand(String verb, String noun)
     {
         this.verb = verb;
         this.noun = noun;
     }
 
+    /**
+     * Called by interpreter
+     * @return message for interpreter to print
+     */
     @Override
     protected String execute() 
     {
@@ -44,20 +53,6 @@ public class ItemSpecificCommand extends Command
                     return "\n" +  messageToReturn + "\n";
                 }
             }
-            
-            
-            //check if noun is in vicinity
-                //if not, return "Theres no ...... here" (check if item null)
-                //check if noun has that verb
-                    //if yes return the appropriate message
-                    //if not return You cant VERB the NOUN
-            
-            
-            
-            
-            
         }
-        
-        
     }
 }

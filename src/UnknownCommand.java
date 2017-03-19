@@ -1,7 +1,7 @@
 
 
 /**
- *
+ * This class returns message to user that their request cannot be identified
  * @author John Herrin
  */
 public class UnknownCommand extends Command

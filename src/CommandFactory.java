@@ -149,27 +149,10 @@ public class CommandFactory
                 //call ISC with "null" as second param
             }
             
-            //if (theKeyWithAmessage!=null && tempItemTable.get(theKey).getPrimaryName().equals(commandName[1])) // if a message is found for the verb(firstword in users request) AND the verb is matched to correct item in the second word of users request, do this
-            else
+            else //users request cannot be processed, return unknown command
             {
                 return unknown;    
-            }
-            
-            /**
-            
-            if(commandName.length > 1)
-            {
-                GameState.instance().getItemInVicinityNamed(commandName[1]);
-                return unknown;
-            }
-            else
-            {
-                return unknown;
-            }
-            */
-        }
-        
-       
+            }  
+        }  
     }
-    
 }

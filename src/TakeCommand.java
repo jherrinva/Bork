@@ -1,7 +1,7 @@
 
 
 /**
- *
+ * This class processes a users request to take an item from a room object
  * @author John Herrin
  */
 public class TakeCommand extends Command
@@ -14,6 +14,10 @@ public class TakeCommand extends Command
         this.itemName = itemName;
     }
     
+    /**
+     * Called by interpreter
+     * @return message for interpreter to print
+     */
     @Override
     protected String execute() 
     {

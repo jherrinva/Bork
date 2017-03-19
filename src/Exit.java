@@ -29,6 +29,12 @@ public class Exit
     }
     
     
+    /**
+     * New constructor, used in creation of dungeon information being hydrated from a file
+     * @param buffReader file being read from
+     * @param d dungeon object containing all rooms/exits
+     * @throws IOException 
+     */
     public Exit(BufferedReader buffReader, Dungeon d) throws IOException
     {
         String currentLine;
@@ -58,12 +64,6 @@ public class Exit
             // third line should be destination room title
         }
     }
-    
-    
-    
-    
-    
-    
     
     
     

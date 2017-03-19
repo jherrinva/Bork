@@ -8,6 +8,10 @@ public class MovementCommand extends Command
 {
     private String dir; // direction this command will move the player in
     
+    /**
+     * Constructor
+     * @param dir Direction player wants to move in
+     */
     protected MovementCommand(String dir)
     {
         this.dir = dir;

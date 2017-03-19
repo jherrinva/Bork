@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 
 /**
- *Subclass of Command class.  Directs program to initiate process of saving users current dungeon state information to .sav file
+ * Subclass of Command class.  Directs program to initiate process of saving users current dungeon state information to .sav file
  * @author John Herrin
  */
 public class SaveCommand extends Command
@@ -33,7 +33,7 @@ public class SaveCommand extends Command
     @Override
     protected String execute()
     {
-        this.saveFilename = GameState.instance().getDungeon().getName() + saveFilename;  //gets dungeon name, adds original String ".sav" to it
+        this.saveFilename = GameState.instance().getDungeon().getName() + ".sav";  //gets dungeon name, adds original String ".sav" to it
         
         while(true)
         {

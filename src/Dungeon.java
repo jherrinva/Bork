@@ -34,7 +34,13 @@ public class Dungeon
         
     }
    
-    
+    /**
+     * New constructor, Used to construct dungeon object from a file
+     * @param fileName name of file to create object from
+     * @param initState if true, items are assigned to default position from .bork file.  false, then set to current location from .sav file
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public Dungeon(String fileName, boolean initState) throws FileNotFoundException, IOException
     {
         
@@ -87,13 +93,7 @@ public class Dungeon
                     lineCounter++; // 3rd line always the delimiter '===' and is unneccesary to process
                     continue;
                 }
-                /**
-                else if (lineCounter == 4)
-                {
-                    lineCounter++; //4th line always "Rooms: "  , and is to be thrown away
-                    continue;
-                }
-                 */
+                
                 else // code block containing item creation, room creation and exit creation
                 {
                     
@@ -112,8 +112,6 @@ public class Dungeon
                         stillOnItems = false;
                         stillOnRooms = true;
                     }
-                    
-                    
                     
                     
                     
@@ -214,6 +212,10 @@ public class Dungeon
         return roomToGet;
     }
     
+    /**
+     * Used in process of saving users current progress.  Pertains to dungeon object
+     * @param w file being written to
+     */
     protected void storeState(PrintWriter w)
     {
         w.println("Dungeon file: " + fileName);
@@ -229,7 +231,11 @@ public class Dungeon
         w.println("==="); //adds delimeter after all room states stored to file
     }
     
-    
+    /**
+     * Used in process of restoring users progress FROM a .sav file
+     * @param w file being read
+     * @throws IOException 
+     */
     protected void restoreState (BufferedReader w) throws IOException
     {
         String currentLine = w.readLine();//currently on Room states: now with this line
@@ -245,16 +251,29 @@ public class Dungeon
         }
     }
     
+    /**
+     * Gets an item stored in dungeon object
+     * @param primaryName name of object to get
+     * @return Item object found
+     */
     public Item getItem(String primaryName)
     {
         return items.get(primaryName);   
     }
     
+    /**
+     * Adds item to dungeon objects item list
+     * @param item 
+     */
     public void add(Item item)
     {
         items.put(item.getPrimaryName(), item);
     }
     
+    /**
+     * Gets the private list of dungeons current items.  Used in CommandFactory to check for valid verbs
+     * @return list of all items in dungeon
+     */
     public Hashtable<String, Item> getItemHashtable()
     {
         return items;

@@ -81,7 +81,11 @@ public class GameState
         return currentDungeon;
     }
     
- 
+    /**
+     * This method begins storing save data of users current progress in dungeon
+     * @param saveName name of .sav file to create
+     * @throws IOException 
+     */
     protected void store(String saveName) throws IOException
     {
         File myFile = new File(saveName);
@@ -156,7 +160,6 @@ public class GameState
                 for (String anItem : inventoryItems)
                 {
                     addToInventory(restoredDungeon.getItem(anItem));
-                    System.out.println("added " + anItem);
                 }
                 
             }
@@ -174,7 +177,10 @@ public class GameState
         }
     }
     
-    
+    /**
+     * Used to get name of all items in players current inventory
+     * @return String arrayist of items in inventory
+     */
     protected ArrayList<String> getInventoryNames()
     {
         ArrayList<String> namesOfItemsInInventory = new ArrayList<>();

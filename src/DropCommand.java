@@ -1,6 +1,6 @@
 
 /**
- *
+ * This class processes a users request to drop an item to the currentRoom
  * @author John Herrin
  */
 public class DropCommand extends Command
@@ -12,7 +12,10 @@ public class DropCommand extends Command
         this.itemName = itemName;
     }
     
-    
+    /**
+     * Called by interpreter
+     * @return message for interpreter to print
+     */
     @Override
     protected String execute() 
     {
